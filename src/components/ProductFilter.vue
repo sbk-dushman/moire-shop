@@ -107,11 +107,12 @@
       </aside>
 </template>
 <script>
+import { defineComponent } from 'vue';
 import axios from 'axios';
 import { API_BASE_PATH } from '@/config';
 import ColorPicker from './ColorPicker.vue';
 
-export default {
+export default defineComponent({
   props: ['priceTo', 'priceFrom', 'categoryId', 'color'],
   components: { ColorPicker },
   data() {
@@ -160,7 +161,7 @@ export default {
       return this.categoriesData ? this.categoriesData.items : [];
     },
   },
-};
+});
 </script>
 <style>
 

@@ -107,13 +107,13 @@
               <h3>{{item.productDitails.title}}</h3>
               <span> x <i> {{item.amount}}</i></span>
               <span>Артикул: {{item.productDitails.id}}</span>
-              <b>  {{item.productDitails.price | numberFormat}} ₽</b>
+              <b>  {{ProductPriceFormat}} ₽</b>
             </li>
           </ul>
 
           <div class="cart__total">
             <p>Доставка: <b>500 ₽</b></p>
-            <p>Итого: <b>{{products.length}}</b> товара на сумму <b> {{TotalPrice | numberFormat}} ₽</b></p>
+            <p>Итого: <b>{{products.length}}</b> товара на сумму <b> {{TotalPriceFormat}} ₽</b></p>
           </div>
 
           <button :disabled="formSanding" class="cart__button button button--primery" type="submit">
@@ -141,10 +141,16 @@ import BaseLoader from '@/components/BaseLoader.vue';
 
 export default {
   name: 'OrderConfirm',
-  filters: { numberFormat },
   components: { BaseFormTextarea, BaseFormText, BaseLoader },
   computed: {
     ...mapGetters({ products: 'cartProductsDitail', TotalPrice: 'cartTotalPrice', cartLoaded: 'cartLoaded' }),
+    TotalPriceFormat() {
+          return numberFormat(this.TotalPrice);
+    },
+    ProductPriceFormat(){
+     return numberFormat(this.item.productDitails.price )
+    }
+
   },
 
   data() {

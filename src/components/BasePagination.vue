@@ -41,23 +41,19 @@
 </template>
 <script>
 export default {
-  props: ['page', 'count', 'perPage'],
-  model: {
-    prop: 'page',
-    event: 'paginate',
-  },
+  props: ['modelValue', 'count', 'perPage'],
   methods: {
     paginate(page, type) {
       if (type === 0) {
         const pageBack = page - 1;
-        this.$emit('paginate', pageBack);
+        this.$emit('update:modelValue', pageBack);
       }
       if (type === 1) {
-        this.$emit('paginate', page);
+        this.$emit('update:modelValue', page);
       }
       if (type === 2) {
         const pageForward = page + 1;
-        this.$emit('paginate', pageForward);
+        this.$emit('update:modelValue', pageForward);
       }
     },
   },
@@ -65,6 +61,9 @@ export default {
     totalPages() {
       return Math.ceil(this.count / this.perPage);
     },
+    page(){
+      return this.modelValue;
+    }
   },
 };
 </script>

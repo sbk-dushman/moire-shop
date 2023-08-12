@@ -64,7 +64,7 @@
         <div class="item__form">
           <form class="form" action="#" method="POST" @submit.prevent="addToCart" >
             <b class="item__price">
-              {{ product.price | numberFormat }} ₽
+              {{  ProductPriceFormat}} ₽
             </b>
 
             <fieldset class="form__block">
@@ -220,9 +220,7 @@ export default {
     },
   },
   components: { ProductCounter, BaseLoader },
-  filters: {
-    numberFormat,
-  },
+
   computed: {
     product() {
       return this.productData;
@@ -231,6 +229,9 @@ export default {
     category() {
       return this.productData.category;
     },
+    ProductPriceFormat(){
+     return numberFormat(this.product.price)
+    }
   },
   methods: {
     ...mapActions(['addProductToCart']),

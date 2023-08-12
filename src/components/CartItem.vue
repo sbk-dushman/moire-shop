@@ -14,7 +14,7 @@
               </span>
                 <ProductCounter counter-class="product__counter form__counter" v-model="productAmount"/>
               <b class="product__price">
-              {{getPriceForAmount | numberFormat}} ₽
+              {{ProductPriceFormat}} ₽
               </b>
 
               <button
@@ -33,15 +33,14 @@ import ProductCounter from './ProductCounter.vue';
 
 export default {
   props: ['product'],
-  filters: {
-    numberFormat,
-  },
+
   components: { ProductCounter},
 
   methods: {
     ...mapActions({ deletePoduct: 'deleteProductFromCart' }),
   },
   computed: {
+    
     productAmount: {
       get() {
         return this.product.amount;
@@ -53,7 +52,10 @@ export default {
     },
     getPriceForAmount() {
         return this.product.productDitails.price * this.product.amount;
-      }
+      },
+    ProductPriceFormat(){
+     return numberFormat(this.getPriceForAmount )
+    }
   },
 
 };

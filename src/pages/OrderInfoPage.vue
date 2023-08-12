@@ -83,13 +83,13 @@
               <h3>{{item.product.title}}</h3>
               <span> x <i> {{item.quantity}}</i></span>
               <span>Артикул: {{item.product.id}}</span>
-              <b>  {{item.product.price | numberFormat}} ₽</b>
+              <b>  {{orderProductPriceFormat}} ₽</b>
             </li>
           </ul>
 
           <div class="cart__total">
             <p>Доставка: <b>{{getDeliveryPrice}} ₽</b></p>
-            <p>Итого: <b>{{getOrder.basket.items.length}} </b> товара на сумму <b>{{orderTotalPrice | numberFormat }} ₽</b></p>
+            <p>Итого: <b>{{getOrder.basket.items.length}} </b> товара на сумму <b>{{orderTotalPrice}} ₽</b></p>
             </div>
         </div>
       </form>
@@ -101,9 +101,6 @@ import numberFormat from '@/helpers/numberFormat';
 import { mapGetters } from 'vuex';
 
 export default {
-  filters: {
-    numberFormat,
-  },
   created() {
     if (this.getOrder && this.getOrder.id === this.$route.params.id) {
       return;
@@ -112,9 +109,13 @@ export default {
   },
   computed: {
     ...mapGetters({ getOrder: 'getOrder', getDeliveryPrice: 'getDeliveryPrice' }),
-    orderTotalPrice() {
-      return this.getOrder.totalPrice + this.getDeliveryPrice;
+    orderTotalPrice(){
+      const orderPrice = this.getOrder.totalPrice + this.getDeliveryPrice;
+      return numberFormat(orderPrice);
     },
+    orderProductPriceFormat(){
+      return numberFormat(this.item.product.price);
+    }
   },
 };
 </script>

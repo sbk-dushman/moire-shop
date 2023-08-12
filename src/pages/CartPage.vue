@@ -38,7 +38,7 @@
             Мы&nbsp;посчитаем стоимость доставки на&nbsp;следующем этапе
           </p>
           <p class="cart__price">
-            Итого: <span>{{TotalPrice | numberFormat}} ₽</span>
+            Итого: <span>{{TotalPriceFormat}} ₽</span>
           </p>
 
           <router-link  tag="button" :to="{name:'orderConfirm'}" :disabled="products.length=== 0" class="cart__button button button--primery" type="submit">
@@ -57,13 +57,14 @@ import BaseLoader from '@/components/BaseLoader.vue';
 import { mapGetters } from 'vuex';
 
 export default {
-  filters: {
-    numberFormat,
-  },
   components: { CartItem, BaseLoader },
   computed: {
     ...mapGetters({ products: 'cartProductsDitail', TotalPrice: 'cartTotalPrice', cartLoaded: 'cartLoaded' }),
-  },
+    
+    TotalPriceFormat() {
+          return numberFormat(this.TotalPrice);
+    },
+  }, 
   methods: {
   },
 

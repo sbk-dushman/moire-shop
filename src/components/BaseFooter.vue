@@ -19,35 +19,35 @@
                 <li class="social__item">
                   <a class="social__link" href="#" aria-label="Вконтакте">
                     <svg width="20" height="11" fill="currentColor">
-                      <use xlink:href="sprite.svg#icon-vk"></use>
+                      <use xlink:href="@/assets/svg/sprite.svg#icon-vk"></use>
                     </svg>
                   </a>
                 </li>
                 <li class="social__item">
                   <a class="social__link" href="#" aria-label="Инстаграм">
                     <svg width="17" height="17" fill="currentColor">
-                      <use xlink:href="sprite.svg#icon-insta"></use>
+                      <use xlink:href="@/assets/svg/sprite.svg#icon-insta"></use>
                     </svg>
                   </a>
                 </li>
                 <li class="social__item">
                   <a class="social__link" href="#" aria-label="Facebook">
                     <svg width="17" height="17" fill="currentColor">
-                      <use xlink:href="sprite.svg#icon-facebook"></use>
+                      <use xlink:href="@/assets/svg/sprite.svg#icon-facebook"></use>
                     </svg>
                   </a>
                 </li>
                 <li class="social__item">
                   <a class="social__link" href="#" aria-label="Twitter">
                     <svg width="17" height="14" fill="currentColor">
-                      <use xlink:href="sprite.svg#icon-twitter"></use>
+                      <use xlink:href="@/assets/svg/sprite.svg#icon-twitter"></use>
                     </svg>
                   </a>
                 </li>
                 <li class="social__item">
                   <a class="social__link" href="#" aria-label="Telegram">
                     <svg width="19" height="17" fill="currentColor">
-                      <use xlink:href="sprite.svg#icon-telegram"></use>
+                      <use xlink:href="@/assets/svg/sprite.svg#icon-telegram"></use>
                     </svg>
                   </a>
                 </li>

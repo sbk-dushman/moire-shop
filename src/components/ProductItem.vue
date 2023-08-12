@@ -11,7 +11,7 @@
 </h3>
 
 <span class="catalog__price">
-{{product.price | numberFormat}} ₽
+{{productPriceFormat}} ₽
 </span>
 <ColorPicker  v-model="currentColor" :available="product.colors"  />
 </li>
@@ -28,13 +28,15 @@ export default {
       currentColor: null,
     };
   },
-  filters: {
-    numberFormat,
+
+    computed:{
+        productPriceFormat() {
+          return numberFormat(this.product.price);
+    }
   },
   methods: {
   },
   components: { ColorPicker },
-
 };
 
 </script>
