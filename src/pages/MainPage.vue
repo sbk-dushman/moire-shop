@@ -29,6 +29,7 @@
 </main>
 </template>
 <script>
+import { defineComponent } from 'vue';
 import axios from 'axios';
 import ProductList from '@/components/ProductList.vue';
 import BasePagination from '@/components/BasePagination.vue';
@@ -36,7 +37,7 @@ import ProductFilter from '@/components/ProductFilter.vue';
 import BaseLoader from '@/components/BaseLoader.vue';
 import { API_BASE_PATH } from '@/config.js';
 
-export default {
+export default defineComponent( {
   name: 'MainPage',
   data() {
     return {
@@ -110,7 +111,7 @@ export default {
     },
   },
   components: { ProductList, BasePagination, ProductFilter, BaseLoader },
-};
+});
 </script>
 <style>
 .catalog{
