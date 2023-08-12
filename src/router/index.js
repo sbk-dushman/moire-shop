@@ -1,5 +1,5 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
+
+import { createRouter, createWebHistory } from 'vue-router';
 import MainPage from '@/pages/MainPage.vue';
 import ProductPage from '@/pages/ProductPage.vue';
 import NotFoundPage from '@/pages/NotFoundPage.vue';
@@ -7,7 +7,6 @@ import CartPage from '@/pages/CartPage.vue';
 import OrderConfirmPage from '@/pages/OrderConfirmPage.vue';
 import OrderInfoPage from '@/pages/OrderInfoPage.vue';
 
-Vue.use(VueRouter);
 
 const routes = [
   { name: 'main', component: MainPage, path: '/' },
@@ -15,8 +14,13 @@ const routes = [
   { name: 'cart', component: CartPage, path: '/cart' },
   { name: 'orderConfirm', component: OrderConfirmPage, path: '/order/confirm' },
   { name: 'orderInfo', component: OrderInfoPage, path: '/order/:id' },
-  { name: 'notFound', component: NotFoundPage, path: '*' },
+  { name: 'notFound', component: NotFoundPage, path: '/:pathMatch(.*)*' },
 ];
 
-const router = new VueRouter({ routes });
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+});
+
 export default router;
+

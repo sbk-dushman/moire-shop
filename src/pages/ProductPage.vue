@@ -197,7 +197,7 @@ import numberFormat from '@/helpers/numberFormat';
 import ProductCounter from '@/components/ProductCounter.vue';
 import BaseLoader from '@/components/BaseLoader.vue';
 import { mapActions } from 'vuex';
-import { API_BASE_PATH } from '../config';
+import { API_BASE_PATH } from '@/config';
 
 export default {
   data() {
@@ -226,14 +226,6 @@ export default {
   computed: {
     product() {
       return this.productData;
-      // Почему-то не хочет работать метод map (из-за асинхронности, но не понял как это обойти )
-
-      return this.productData ? this.productData.map((product) => {
-        return {
-          ... product,
-          img: product.image.file.url
-        }
-      }) : [];
     },
 
     category() {

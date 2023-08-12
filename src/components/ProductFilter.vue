@@ -108,7 +108,7 @@
 </template>
 <script>
 import axios from 'axios';
-import { API_BASE_PATH } from '../config';
+import { API_BASE_PATH } from '@/config';
 import ColorPicker from './ColorPicker.vue';
 
 export default {
