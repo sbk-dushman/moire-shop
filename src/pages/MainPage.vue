@@ -10,10 +10,10 @@
   </div>
 
   <div class="content__catalog">
-    <ProductFilter :price-to.sync="filterPriceTo"
-                   :price-from.sync ="filterPriceFrom"
-                   :category-id.sync="filterCategoryId"
-                   :color.sync="filterColor"/>
+    <ProductFilter v-model:price-to="filterPriceTo"
+                  v-model:price-from ="filterPriceFrom"
+                  v-model:category-id="filterCategoryId"
+                  v-model:color="filterColor"/>
 
 
     <section class="catalog">

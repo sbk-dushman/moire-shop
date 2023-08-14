@@ -4,7 +4,7 @@
 :class="{ 'colors--black' :getAvailableColors }"
 >
 
-<li  class="colors__item" v-for="(color,index) in (getAvailableColors!=null ? getAvailableColors :colorsData)" :key="color.id" >
+<li  class="colors__item" v-for="(color) in (getAvailableColors!=null ? getAvailableColors :colorsData)" :key="color.id" >
   <label class="colors__label">
     <input class="colors__radio sr-only" v-model="currentColor" type="radio" :name="color.id" :value="color.id">
   <span class="colors__value" :style="`background-color:${color.code}`">
@@ -20,14 +20,11 @@ import { mapGetters } from 'vuex';
 export default {
   name: 'ColorPicker',
   props: {
-    color: {},
+    modelValue:{},
+
     available: {
       default: null,
     },
-  },
-  model: {
-    prop: 'color',
-    event: 'color-change',
   },
   data() {
     return {
@@ -39,11 +36,11 @@ export default {
     ...mapGetters({ colorsData: 'getColorsData'}),
     currentColor: {
       get() {
-        return this.color;
+        return this.modelValue;
       },
       set(value) {
         console.log(value);
-        this.$emit('color-change', value);
+        this.$emit('update:modelValue', value);
       },
     },
     getAvailableColors() {

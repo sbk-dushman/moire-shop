@@ -214,10 +214,16 @@ export default {
   watch: {
     '$route.params.id': {
       handler() {
-        this.loadProducts();
+     
       },
       immediate: true,
     },
+  },
+  created(){
+    this.loadProducts();
+  },
+  beforeRouteUpdate(){
+    this.loadProducts();
   },
   components: { ProductCounter, BaseLoader },
 
