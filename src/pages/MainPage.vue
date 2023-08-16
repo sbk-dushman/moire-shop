@@ -1,13 +1,16 @@
 <template>
   <main class="content container">
-  <div class="content__top content__top--catalog">
-    <h1 class="content__title">
-      Каталог
-    </h1>
-    <span class="content__info">
-      152 товара
-    </span>
-  </div>
+    <div class="content__top">
+
+<div class="content__row">
+  <h1 class="content__title">
+    Каталог
+  </h1>
+  <span class="content__info">
+    152 товара
+  </span>
+</div>
+</div>
 
   <div class="content__catalog">
     <ProductFilter v-model:price-to="filterPriceTo"
@@ -99,12 +102,14 @@ export default defineComponent( {
         },
   computed: {
     getProducts() {
-      return this.productsData ? this.productsData.items.map(product=> {
+      return this.productsData ? this.productsData.items
+      .map(product => {
         return {
           ... product,
-          img: product.image.file.url
+          img: product.colors[0].gallery[0].file.url
         }
-      }) : [];
+      }) 
+      : [];
     },
     countProducts() {
       return this.productsData ? this.productsData.pagination.total : 0;
