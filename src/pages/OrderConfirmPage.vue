@@ -107,7 +107,7 @@
               <h3>{{item.productDitails.title}}</h3>
               <span> x <i> {{item.amount}}</i></span>
               <span>Артикул: {{item.productDitails.id}}</span>
-              <b>  {{ProductPriceFormat}} ₽</b>
+              <b>  {{item.productDitails.priceFormat}} ₽</b>
             </li>
           </ul>
 
@@ -147,11 +147,7 @@ export default {
     TotalPriceFormat() {
           return numberFormat(this.TotalPrice);
     },
-    ProductPriceFormat(){
-     return numberFormat(this.item.productDitails.price )
-    }
-
-  },
+   },
 
   data() {
     return {

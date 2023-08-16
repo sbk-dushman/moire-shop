@@ -23,19 +23,15 @@
 <script>
 
 export default {
-  model: {
-    prop: 'amount',
-    event: 'amount-change',
-  },
-  props: ['amount', 'counter-class'],
+  props: ['modelValue', 'counter-class'],
   computed: {
 
     currentAmaunt: {
       get() {
-        return this.amount;
+        return this.modelValue;
       },
       set(value) {
-        this.$emit('amount-change', value);
+        this.$emit('update:modelValue', value);
       },
     },
   },

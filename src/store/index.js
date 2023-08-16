@@ -1,5 +1,6 @@
 import { createStore } from 'vuex';
 import axios from 'axios';
+import numberFormat from '@/helpers/numberFormat';
 import { API_BASE_PATH } from '@/config';
 
 
@@ -10,6 +11,7 @@ export default createStore({
     userAccessKey: null,
     cartProductsData: null,
     cartLoaded: false,
+    orderLoaded: false,
     deliveryPrice: 500,
     orderInfo: [],
     colorsData: [],
@@ -23,6 +25,7 @@ export default createStore({
     },
     upadateOrderInfo(state, orderInfo) {
       state.orderInfo = orderInfo;
+      state.orderLoaded= true;
     },
     upadateColorsData(state, colorData) {
       state.colorsData = colorData;
@@ -63,6 +66,7 @@ export default createStore({
           productDitails: {
             ...productDitails,
             img: productDitails.image.file.url,
+            priceFormat:  numberFormat (productDitails.price )
           },
         };
       });
@@ -77,8 +81,11 @@ export default createStore({
     cartLoaded(state) {
       return state.cartLoaded;
     },
+    orderLoaded(state) {
+      return state.orderLoaded;
+    },
     getOrder(state) {
-      return state.orderInfo;
+        return state.orderInfo
     },
     getDeliveryPrice(state) {
       return state.deliveryPrice;

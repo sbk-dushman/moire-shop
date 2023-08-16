@@ -1,5 +1,6 @@
 <template>
-    <main class="content container">
+     <BaseLoader :is-loading="!orderLoaded" v-if="!orderLoaded"/>
+    <main  v-if="orderLoaded" class="content container">
     <div class="content__top">
       <ul class="breadcrumbs">
         <li class="breadcrumbs__item">
@@ -79,11 +80,11 @@
 
         <div class="cart__block">
           <ul class="cart__orders">
-            <li class="cart__order" v-for="item in getOrder.basket.items" :key="item.product.id">
+            <li class="cart__order" v-for="item in orderProductPriceFormat" :key="item.product.id">
               <h3>{{item.product.title}}</h3>
               <span> x <i> {{item.quantity}}</i></span>
               <span>Артикул: {{item.product.id}}</span>
-              <b>  {{orderProductPriceFormat}} ₽</b>
+              <b>  {{item.priceformat}} ₽</b>
             </li>
           </ul>
 
@@ -99,7 +100,7 @@
 <script>
 import numberFormat from '@/helpers/numberFormat';
 import { mapGetters } from 'vuex';
-
+import BaseLoader from '@/components/BaseLoader.vue';
 export default {
   created() {
     if (this.getOrder && this.getOrder.id === this.$route.params.id) {
@@ -107,14 +108,25 @@ export default {
     }
     this.$store.dispatch('loadOrderInfo', this.$route.params.id);
   },
+  components: { BaseLoader},
   computed: {
-    ...mapGetters({ getOrder: 'getOrder', getDeliveryPrice: 'getDeliveryPrice' }),
+    ...mapGetters({orderLoaded:'orderLoaded', getOrder: 'getOrder', getDeliveryPrice: 'getDeliveryPrice' }),
     orderTotalPrice(){
       const orderPrice = this.getOrder.totalPrice + this.getDeliveryPrice;
       return numberFormat(orderPrice);
     },
+      
     orderProductPriceFormat(){
-      return numberFormat(this.item.product.price);
+      if (this.orderLoaded) {
+        return this.getOrder.basket.items.map((item)=>{
+      return {
+        ...item, 
+        priceformat : numberFormat (item.price) 
+      }
+      });
+      }
+      return null;
+
     }
   },
 };
