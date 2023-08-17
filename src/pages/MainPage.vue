@@ -90,7 +90,7 @@ export default defineComponent( {
                           categoryId: this.filterCategoryId,
                           minPrice: this.filterPriceFrom,
                           maxPrice: this.filterPriceTo,
-                          colorId: this.filterColor,
+                          colorIds: this.filterColor,
                           }
                         })
                 .then((response) =>  this.productsData = response.data)

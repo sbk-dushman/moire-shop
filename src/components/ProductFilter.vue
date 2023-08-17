@@ -229,7 +229,8 @@
           <button class="filter__submit button button--primery" type="submit">
             Применить
           </button>
-          <button class="filter__reset button button--second" type="button">
+          <button @click.prevent="reset"
+            class="filter__reset  button button--second" type="button">
             Сбросить
           </button>
         </form>
@@ -250,7 +251,7 @@ export default defineComponent({
       currentPriceTo: 0,
       currentCategoryId: 0,
       categoriesData: null,
-      currentColor: null,
+      currentColor: [],
 
     };
   },
@@ -276,7 +277,7 @@ export default defineComponent({
       this.$emit('update:priceTo', 0);
       this.$emit('update:priceFrom', 0);
       this.$emit('update:categoryId', 0);
-      this.$emit('update:color', 0);
+      this.$emit('update:color', []);
     },
     loadCategories() {
       axios.get(API_BASE_PATH + '/api/productCategories').then(response => this.categoriesData= response.data)

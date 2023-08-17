@@ -6,7 +6,7 @@
 
 <li  class="colors__item" v-for="(color) in (getAvailableColors!=null ? getAvailableColors :colorsData)" :key="color.id" >
   <label class="colors__label">
-    <input class="colors__radio sr-only" v-model="currentColor" type="radio" :name="color.id" :value="color.id">
+    <input class="colors__radio sr-only" v-model="currentColor" type="checkbox" name="color" :value="color.id">
   <span class="colors__value" :style="`background-color:${color.code}`">
     </span>
   </label>
@@ -20,7 +20,10 @@ import { mapGetters } from 'vuex';
 export default {
   name: 'ColorPicker',
   props: {
-    modelValue:{},
+    modelValue:{
+      Array,
+      default: [],
+    },
 
     available: {
       default: null,
@@ -45,7 +48,10 @@ export default {
     },
     getAvailableColors() {
       if (this.available != null) {
-        const available = this.available.map((color) => color.id);
+        
+        // const available = this.available.map((color) => color.id);
+             const available = toRaw (this.available) .map((item) =>item.color);
+        console.log(available);
         return this.colorsData.filter((item) => available.includes(item.id));
       }
       return null;
