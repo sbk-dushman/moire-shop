@@ -4,9 +4,10 @@
 :class="{ 'colors--black' :getAvailableColors }"
 >
 
-<li  class="colors__item" v-for="(color) in (getAvailableColors!=null ? getAvailableColors :colorsData)" :key="color.id" >
+<li  class="colors__item" v-for="(color,index) in (getAvailableColors!=null ? getAvailableColors :colorsData)" :key="color.id" >
   <label class="colors__label">
-    <input class="colors__radio sr-only" v-model="currentColor" type="checkbox" name="color" :value="color.id">
+    {{ index }}
+    <input class="colors__radio sr-only" v-model="currentColor" :type="(getAvailableColors!=null ? 'radio' :'checkbox')" :name="(getAvailableColors!=null& id!=null ? id :'color') "    :value="(index === 0 ?  currentColor : color.id)">
   <span class="colors__value" :style="`background-color:${color.code}`">
     </span>
   </label>
@@ -16,6 +17,7 @@
 </template>
 <script>
 import { mapGetters } from 'vuex';
+import { toRaw } from 'vue';
 
 export default {
   name: 'ColorPicker',
@@ -28,11 +30,15 @@ export default {
     available: {
       default: null,
     },
+    id: {
+      default: null,
+    }
   },
   data() {
     return {
       colorLoading: false,
       colorLoadingFailed: false,
+      
     };
   },
   computed: {
@@ -42,20 +48,17 @@ export default {
         return this.modelValue;
       },
       set(value) {
-        console.log(value);
         this.$emit('update:modelValue', value);
       },
     },
     getAvailableColors() {
       if (this.available != null) {
-        
-        // const available = this.available.map((color) => color.id);
-             const available = toRaw (this.available) .map((item) =>item.color);
-        console.log(available);
+             const available = toRaw(this.available).map((item) =>item.color.id);
         return this.colorsData.filter((item) => available.includes(item.id));
       }
       return null;
     },
+
   },
   methods: {
 

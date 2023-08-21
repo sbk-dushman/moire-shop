@@ -103,12 +103,6 @@ export default defineComponent( {
   computed: {
     getProducts() {
       return this.productsData ? this.productsData.items
-      .map(product => {
-        return {
-          ... product,
-          img: product.colors[0].gallery[0].file.url
-        }
-      }) 
       : [];
     },
     countProducts() {
